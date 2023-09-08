@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /><!-- 이미지 권한설정 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" /><!-- 비디오 권한설정 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" /><!-- 오디오 권한설정 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.Demetory">
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <!-- 카메라를 쓸 때는 이거를 반드시 넣어주세요 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="co.kr.itforone.demetory"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!-- resource 디렉토리에 xml 디렉토리를 만들고 file_paths 파일 만들어주세요 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
